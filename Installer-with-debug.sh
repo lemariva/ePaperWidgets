@@ -1,12 +1,12 @@
 #!/bin/bash
-# E-Paper-Calendar software installer for Raspberry pi
-# Version: 1.6 (Mid April 2019)
+# ePaper-Widgets-Calendar software installer for Raspberry pi
+# Version: 0.1 (August 2019)
 # Stability status of this installer: Stable
 
 echo -e "\e[1mPlease select an option from below:"
-echo -e "\e[97mEnter \e[91m1 \e[97m to update the E-Paper software"
-echo -e "\e[97mEnter \e[91m2 \e[97m to install the E-Paper software"
-echo -e "\e[97mEnter \e[91m3 \e[97m to uninstall the E-Paper software"
+echo -e "\e[97mEnter \e[91m1 \e[97m to update the ePaper-Widgets software"
+echo -e "\e[97mEnter \e[91m2 \e[97m to install the ePaper-Widgets software"
+echo -e "\e[97mEnter \e[91m3 \e[97m to uninstall the ePaper-Widgets software"
 echo -e "\e[97mConfirm your selection with [ENTER]"
 read -r -p 'Waiting for input...  ' option
 
@@ -19,42 +19,40 @@ if [ -z "$option" ]; then
     exit
 fi
 if [ "$option" = 3 ]; then
-    echo -e "\e[1;36m"Removing the E-Paper software now..."\e[0m"
+    echo -e "\e[1;36m"Removing the ePaper-Widgets software now..."\e[0m"
     pip3 uninstall Pillow -y && sudo pip3 uninstall Pillow -y && sudo pip3 uninstall pyowm -y&& sudo pip3 uninstall ics -y && pip3 uninstall pyowm -y && pip3 uninstall ics -y && sudo apt-get remove supervisor -y && pip3 uninstall feedparser -y && sudo pip3 uninstall feedparser -y && sudo apt-get clean && sudo apt-get autoremove -y
-    if [ -e /etc/supervisor/conf.d/E-Paper.conf ]; then
-        sudo rm /etc/supervisor/conf.d/E-Paper.conf
+    if [ -e /etc/supervisor/conf.d/e_paper_widgets.conf ]; then
+        sudo rm /etc/supervisor/conf.d/e_paper_widgets.conf
     fi
     echo -e "\e[1;36m"The libraries have been removed successfully"\e[0m"
     sleep 1
-    echo -e "Removing the Inky-Calendar folder if it exists"
-    if [ -d "/home/pi/Inky-Calendar" ]; then
-        sudo rm -r /home/pi/Inky-Calendar/
-	echo -e "\e[1;36m"Found the E-Paper-software folder and deleted it"\e[0m"
+    echo -e "Removing the ePaper-Widgets folder if it exists"
+    if [ -d "/home/pi/e_paper_widgets" ]; then
+        sudo rm -r /home/pi/e_paper_widgets/
+	echo -e "\e[1;36m"Found the ePaper-Widgets software folder and deleted it"\e[0m"
     fi
     echo -e "\e[1;36m"All done!"\e[0m"
 fi
 
 if [ "$option" = 1 ]; then
     echo -e "\e[1;36m"Checking if the settings.py exists..."\e[0m"
-    if [ -e /home/pi/Inky-Calendar/Calendar/settings.py ]; then
-        echo -e "Found an E-Paper settings file."
+    if [ -e /home/pi/e_paper_widgets/settings.py ]; then
+        echo -e "Found an ePaper-Widgets settings file."
         sleep 2
 	echo "Backing up the current settings file in the home directory."
 	sleep 2
-	cp /home/pi/Inky-Calendar/Calendar/settings.py /home/pi/settings-old.py
-	echo -e "renaming the old E-Paper software folder"
+	cp /home/pi/e_paper_widgets/settings.py /home/pi/settings-old.py
+	echo -e "renaming the old ePaper-Widgets software folder"
 	sleep 2
-	cp -r /home/pi/Inky-Calendar /home/pi/Inky-Calendar-old
-	sudo rm -r /home/pi/Inky-Calendar
-	mv /home/pi/Inky-Calendar-old/Calendar /home/pi/Inky-Calendar-old/Calendar-old #added due to relative path which searches for 
-	# the 'Calendar' folder
+	cp -r /home/pi/e_paper_widgets /home/pi/e_paper_widget_old
+	sudo rm -r /home/pi/e_paper_widgets
 	echo "Updating now..."
         cd
     else
         # Ask to update anyway. May not work always, but can help with new versions.
-	echo -e "\e[1;36m"Could not find the configuration file -settings.py- in /home/pi/Inky-Calendar/Calendar"\e[0m"
+	echo -e "\e[1;36m"Could not find the configuration file -settings.py- in /home/pi/e_paper_widgets"\e[0m"
 	sleep 2
-	echo -e "\e[1;36m"Would you like to update the Inky-Calendar software anyway?"\e[0m"
+	echo -e "\e[1;36m"Would you like to update the ePaper-Widgets software anyway?"\e[0m"
         echo -e "\e[97mPlease type [y] for yes or [n] for no and confirm your selection with [ENTER]"
         read -r -p 'Waiting for input...  ' update_anyway
     
@@ -274,7 +272,7 @@ if [ "$option" = 1 ] || [ "$option" = 2 ]; then
     # Clone the repository, then delete some non-required files
     echo -e "\e[1;36m"Installing the Inky-Calendar Software for your display"\e[0m"
     cd ~
-    git clone https://github.com/lemariva/e_paper_widgets.git e_paper_widgets
+    git clone https://github.com/lemariva/ePaperWidgets.git e_paper_widgets
     
     # Make a copy of the sample settings.py file
     cd ~/e_paper_widgets
