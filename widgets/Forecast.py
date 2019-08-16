@@ -26,7 +26,7 @@ WIDGET_HEIGHT = 384
 
 class ForecastWidget:
 
-    def __init__(self, language, api_key, units, hours, location):
+    def __init__(self, language="en", api_key=None, units="metric", hours="12", location="Hannover, DE"):
         if (api_key is None or ""):
             raise ValueError('API key is missing')
 

@@ -1,5 +1,5 @@
 #!/bin/bash
-# ePaper-Widgets-Calendar software installer for Raspberry pi
+# ePaperWidgets software installer for Raspberry pi
 # Version: 0.1 (August 2019)
 # Stability status of this installer: Stable
 
@@ -122,7 +122,7 @@ if [ "$option" = 1 ] || [ "$option" = 2 ]; then
     # Installing dependencies
     
     #PYOWM for user pi
-    echo -e "\e[1;36m"Installing dependencies for the Inky-Calendar software"\e[0m"
+    echo -e "\e[1;36m"Installing dependencies for the ePaperWidgets software"\e[0m"
     
     echo -e "\e[1;36m"Checking if pyowm is installed for user pi"\e[0m"
     if python3.5 -c "import pyowm" &> /dev/null; then
@@ -270,7 +270,7 @@ if [ "$option" = 1 ] || [ "$option" = 2 ]; then
     echo -e "\e[1;36m"Finished installing all dependencies"\e[0m"
     
     # Clone the repository, then delete some non-required files
-    echo -e "\e[1;36m"Installing the Inky-Calendar Software for your display"\e[0m"
+    echo -e "\e[1;36m"Installing the ePaperWidgets Software for your display"\e[0m"
     cd ~
     git clone https://github.com/lemariva/ePaperWidgets.git e_paper_widgets
     
